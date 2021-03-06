@@ -38,4 +38,4 @@ We get the following in our confounds file which can now be passed onto xcp for 
 `[ 0.1 0.02 0.004 0.5 0.5 0.32 0.5 0.12 0.11 0.15]`
 
 ## Script Example
-The script `runxcp.sh` provides an example of how one might use `modifyConfounds.py` and the custom version of **xcpEngine** to accomplish the example describe above.
+The script `runxcp.sh` provides an example of how one might use `modifyConfounds.py` and the custom version of **xcpEngine** to accomplish the example described above.
