@@ -1,6 +1,14 @@
 # maddenXCP
 Customized version of **xcpEngine version v1.2.3** to enable censoring of adjacent volumes
 
+## Using maddenXCP
+This repository can be cloned to your local disk and then in the `./build` directory, the script `buildscript.sh` can be edited to create a docker image which can be converted to a singularity image with the command `singularity build $SINGNAME docker://$DOCKERURI`. You will have to push the docker image to **Docker Hub** to build it in singularity unless you create a local registry for managing your images.
+
+A version of this docker image has been created which you can also download and use on your cluster without having to go through the build step above. It is called `aacazxnat/xcpengine-madden:1.0`
+
+You can build a singularity image called `xcpengine-madden.sif` as follows:
+`singularity build xcpengine-madden.sif docker://aacazxnat/xcpengine-madden:1.0`
+
 ## Changes to xcp-engine
 
 `${XCPEDIR}/utils/fd.R` main code has been commented out to prevent creation of the `.../confound2/mc/${SUB}_${SES}_fd.1D` file which is created from the 6 motion regressors provided by fmriprep.
@@ -28,3 +36,6 @@ Thus after running this through `modifyConfounds.py` as follows
 We get the following in our confounds file which can now be passed onto xcp for scrubbing:
 
 `[ 0.1 0.02 0.004 0.5 0.5 0.32 0.5 0.12 0.11 0.15]`
+
+## Script Example
+The script `runxcp.sh` provides an example of how one might use `modifyConfounds.py` and the custom version of **xcpEngine** to accomplish the example describe above.
