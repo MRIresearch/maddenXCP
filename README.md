@@ -1,5 +1,5 @@
 # maddenXCP
-Customized version of xcp-engine version v1.2.3 to enable censoring of adjacent volumes
+Customized version of **xcpEngine version v1.2.3** to enable censoring of adjacent volumes
 
 ## Changes to xcp-engine
 
@@ -9,11 +9,11 @@ Customized version of xcp-engine version v1.2.3 to enable censoring of adjacent 
 
 ## Workflow of maddenXCP
 
-The python program `modifyConfounds.py` can be called to artificially flag volumes before and after an outlier volume that exceeds a framewise displacement threshold. 
+The python program `modifyConfounds.py` can be called to artificially flag volumes before and after an outlier volume that exceeds a Framewise Displacement (FD) threshold. 
 
 The framewise displacement value for these neighboring timepoints is then replaced by an inflated value that will be subsequently picked up by **xcpEngine** as an outlier.
 
-Please note that this functionality has only been created as an inelegant workaround to the above problem. Any functionality in xcpEngine that relies on accurate FD values will be compromised. This is likely to include some of the QCFC metrics that are calculated for each subject. A recommendation then is to run your denoising pipeline twice. The first time to derive the censored volumes using this custom version of xcpEngine and then a second time with the proper stable version of xcpEngine to obtain gold standard outputs.
+Please note that this functionality has only been created as an inelegant workaround to the above problem. Any functionality in **xcpEngine** that relies on accurate FD values will be compromised. This is likely to include some of the QCFC metrics that are calculated for each subject. A recommendation then is to run your denoising pipeline twice. The first time to derive the censored volumes using this custom version of xcpEngine and then a second time with the proper stable version of xcpEngine to obtain gold standard outputs for some of the quality metrics that rely on accurate Framewise Displacement.
 
 ### Example
 Using a framewise displacement threshold of `0.3mm`, I intend to flag 2 preceding volumes to outlier volumes to be scrubbed and 1 subsequent volume.
@@ -23,7 +23,7 @@ So in a toy example of 10 volumes with FD as follows `[ 0.1 0.02 0.004 0.15 0.12
 We expect the 6th volume to be scrubbed and thus we want to also scrub volumes 4 and 5 and 7.
 Thus after running this through `modifyConfounds.py` as follows
 
-`modifyConfounds.py ${COUNFOUND_FILE} --confound_out=${BACKUP_NAME} --fd_thresh=0.3 --fd_replacement=0.5 --vols_before=2 --vols_after=1`
+`modifyConfounds.py ${CONFOUND_FILE} --confound_out=${BACKUP_NAME} --fd_thresh=0.3 --fd_replacement=0.5 --vols_before=2 --vols_after=1`
 
 We get the following in our confounds file which can now be passed onto xcp for scrubbing:
 
