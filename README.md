@@ -1,5 +1,5 @@
 # maddenXCP
-Customized version of **xcpEngine version v1.2.3** to enable censoring of adjacent volumes
+Customized version of **[xcpEngine version v1.2.3](https://github.com/PennBBL/xcpEngine)** to enable censoring of adjacent volumes which was not [implemented](https://github.com/PennBBL/xcpEngine/issues/431) at the time of creation of this repository.
 
 ## Using maddenXCP
 This repository can be cloned to your local disk and then in the `./build` directory, the script `buildscript.sh` can be edited to create a docker image which can be converted to a singularity image with the command `singularity build $SINGNAME docker://$DOCKERURI`. You will have to push the docker image to **Docker Hub** to build it in singularity unless you create a local registry for managing your images.
